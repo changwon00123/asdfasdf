@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#11152c">
+<meta name="description" content="6명의 영웅과 의상 커스터마이징이 있는 무료 픽셀 좀비 러닝 게임">
+<title>좀비런 DX v4 | 6명의 픽셀 히어로</title>
+<style>
+:root{color-scheme:dark;--bg:#10132a;--panel:#1b2344;--line:#5966a2;--gold:#ffe27c;--pink:#fb8cc4;--cyan:#8ff6f5}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#0c1024;color:#fff;font-family:system-ui,-apple-system,'Malgun Gothic',sans-serif}body{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;gap:10px;overscroll-behavior:none}.top{width:min(100%,1080px);display:flex;justify-content:space-between;align-items:center;gap:12px}.logo{font-weight:1000;color:var(--gold);letter-spacing:1px;text-shadow:3px 3px 0 #a14b76;font-size:clamp(19px,3vw,27px)}.help{color:#c2d3ff;font-size:12px;text-align:right}#frame{width:min(100%,1080px);aspect-ratio:16/9;position:relative;overflow:hidden;border:4px solid #5d69a6;box-shadow:0 0 0 4px #222b52,0 20px 55px #0009;background:#17203c;image-rendering:pixelated;border-radius:7px}canvas{display:block;width:100%;height:100%;image-rendering:pixelated}#hud{position:absolute;top:12px;left:13px;right:13px;display:none;align-items:flex-start;justify-content:space-between;pointer-events:none;gap:8px}.hudbox{background:#11162ad9;border:2px solid #6876b8;padding:7px 11px;color:#f4f7ff;line-height:1.5;font-weight:900;font-size:clamp(11px,1.5vw,17px);text-shadow:2px 2px #12142b}.hudbox span{color:#ffe787}.hudbox.right{text-align:right}#pauseBtn{pointer-events:auto;background:#222a54;border:2px solid #8fa6df;color:white;font-size:19px;font-weight:900;cursor:pointer;padding:4px 9px}.overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#080d23a8;padding:18px;overflow-y:auto}.box{background:#171e3dec;border:3px solid #8e9ad3;box-shadow:8px 8px #0c1026;padding:clamp(13px,2.8vw,26px);width:min(96%,680px);text-align:center}.box h1{font-size:clamp(21px,4.3vw,38px);margin:0 0 5px;color:#ffe783;text-shadow:3px 3px #9b3e75}.box h2{color:#ffdc79;margin:0 0 10px;font-size:clamp(23px,4vw,32px)}.box p{font-size:clamp(12px,1.7vw,16px);color:#cbd6ff;margin:5px 0 13px}.choices{display:flex;gap:12px;justify-content:center;margin:10px 0 18px}.choice{flex:1;min-width:0;max-width:235px;padding:10px 6px;color:#fff;background:#263057;border:3px solid #6174ad;cursor:pointer;font-weight:900;font-size:clamp(13px,2vw,18px);touch-action:manipulation}.choice.active{background:#3e3562;border-color:#ffe27c;box-shadow:0 0 0 3px #9f6889}.avatar{display:block;width:96px;height:100px;margin:0 auto 3px;image-rendering:pixelated}.choice small{display:block;margin-top:3px;color:#cbd7ff;font-weight:600;font-size:11px}.btn{padding:11px 24px;background:#f7c85d;border:3px solid #fff1ae;box-shadow:4px 4px #a25a44;color:#231a34;font-weight:1000;font-size:clamp(15px,2.3vw,21px);cursor:pointer;touch-action:manipulation}.btn:active,.choice:active{transform:translate(2px,2px);box-shadow:none}.secondary{background:#56658f;border-color:#a6b7ee;box-shadow:3px 3px #262e54;color:white}.hide{display:none!important}#touch{display:none;width:min(100%,1080px);justify-content:space-between;gap:10px;user-select:none;touch-action:none}.touchbtn{flex:1;min-height:62px;border:3px solid #8c9cd5;background:#243158;color:white;font-size:21px;font-weight:900;border-radius:8px;touch-action:none}.touchbtn:active{background:#495e94}.foot{text-align:center;color:#a9b9ee;font-size:12px;max-width:1080px}#notice{position:absolute;left:50%;top:28%;transform:translateX(-50%);font-size:clamp(17px,3vw,28px);font-weight:1000;color:#fff7b4;text-shadow:3px 3px #602c62;white-space:nowrap;pointer-events:none}#notice:empty{display:none}
+@media(pointer:coarse),(max-width:780px){body{justify-content:flex-start}.help{font-size:10px}#touch{display:flex}#frame{border-width:3px}.overlay{padding:5px}.box{padding:9px}.box h1{margin-bottom:1px}.box p{margin-bottom:5px}.choices{margin:5px 0 10px;gap:7px}.choice{padding:4px}.avatar{width:62px;height:60px}.touchbtn{font-size:17px;min-height:62px}}@media(max-height:550px) and (orientation:landscape){body{padding:4px;gap:3px}.top{display:none}#frame{max-height:calc(100dvh - 75px);width:auto;max-width:100%}#touch{min-height:56px}.touchbtn{min-height:48px}.foot{display:none}}
+
+/* DX edition */
+:root{--gold:#ffe17d;--cyan:#76f2ee}body{background:radial-gradient(ellipse at 45% 0%,#29345f 0%,#080d20 75%)}#frame{box-shadow:0 0 0 4px #212b52,0 24px 70px #000c,0 0 46px #7280df35}.box{background:linear-gradient(145deg,#253259f5,#161832f5);border-color:#a6b7ed}.box h3{margin:8px 0;color:#e5eeff;font-size:15px}.box h3 small{color:#aebde6;font-size:11px}.loadout{background:#0f1936aa;border:1px solid #778cc2;padding:6px 8px;margin:6px auto 10px;max-width:600px}.shop{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.shopitem{background:#28395a;border:2px solid #687ca8;color:white;border-radius:4px;padding:7px 2px;font-size:12px;cursor:pointer;min-height:69px}.shopitem span{display:block;font-size:23px}.shopitem small{display:block;color:#d6e2ff;font-size:10px}.shopitem.equipped{border-color:#ffe58c;background:#524064}.shopitem:disabled{opacity:.55;cursor:default}.wallet{color:#ffe58c;font-size:13px;margin-top:5px}.upgradebox{max-width:760px}.upgradechoices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.upgradecard{background:linear-gradient(#364b78,#253153);border:3px solid #839dd1;color:#fff;min-height:158px;padding:14px 6px;cursor:pointer;font-weight:900;touch-action:manipulation}.upgradecard:hover,.upgradecard:focus{border-color:#ffe587;background:#4a477b}.upgradecard .large{display:block;font-size:34px;margin-bottom:5px}.upgradecard small{display:block;font-size:12px;color:#d1dafa;font-weight:500;margin-top:8px}.hudbox{background:#101629e8;border-color:#90a4db}.top .logo{text-shadow:3px 3px 0 #92335d}.foot{line-height:1.6}@media(max-width:780px){.shopitem{padding:4px 0;min-height:57px;font-size:10px}.shopitem span{font-size:17px}.shopitem small{font-size:9px}.upgradecard{min-height:110px;padding:7px 3px;font-size:12px}.upgradecard .large{font-size:22px}.upgradecard small{font-size:10px}.box h3{font-size:12px}.box{max-height:99%;overflow:auto}.hudbox{padding:3px 5px;font-size:10px!important}.overlay{align-items:center}}
+
+/* v4: 6 heroes and costume studio */
+.box.menu-box{width:min(97%,850px);padding:13px 18px}.box.menu-box h1{font-size:clamp(20px,3vw,30px)}
+.hero-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin:9px 0}
+.hero-grid .choice{max-width:none;padding:7px 2px;font-size:12px;line-height:1.3}.hero-grid .choice .avatar{width:65px;height:68px}.hero-grid .choice small{font-size:10px}
+.studio{background:#0c1734cc;border:1px solid #879bd2;padding:10px;margin:9px auto;max-width:760px}
+.studio h3{margin:0 0 7px}.studio-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;text-align:left}.studio label{font-size:12px;font-weight:800;color:#cbdcff;display:block;margin-bottom:4px}
+.studio select{background:#293759;color:#fff;border:2px solid #738aca;border-radius:4px;padding:8px;width:100%;font-weight:800}
+.color-swatches{display:flex;flex-wrap:wrap;gap:6px}.swatch{width:27px;height:27px;border:2px solid #b3bbd3;cursor:pointer;border-radius:50%;padding:0}.swatch.active{outline:3px solid #ffe18a;outline-offset:2px}
+.studio .outfit-desc{font-size:11px;color:#d6e2fc;margin:8px 0 0}.shop{gap:5px}.loadout{margin:7px auto}.foot{font-size:11px}
+@media(max-width:780px){.hero-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}.hero-grid .choice{font-size:11px;padding:4px 1px}.hero-grid .choice .avatar{height:50px;width:53px}.hero-grid .choice small{font-size:9px}.studio{padding:5px}.studio select{padding:5px}.studio label{font-size:10px}.studio-grid{gap:4px}.swatch{height:22px;width:22px}.box.menu-box{padding:7px}.box.menu-box p{margin:2px 0}}
+</style>
+</head>
+<body>
+<div class="top"><div class="logo">★ 좀비런 DX: 몬스터 대탈출 ★</div><div class="help">PC: 스페이스 길게 = 높이 점프 · ↓ 슬라이딩 · X 스킬<br>모바일: 아래 버튼으로 조작</div></div>
+<div id="frame">
+ <canvas id="game" width="960" height="540" aria-label="좀비런 게임 화면"></canvas>
+ <div id="hud"><div class="hudbox">❤️ <span id="hp">♥♥♥</span>　⚔ <span id="attack">1</span><br>⭐ 점수 <span id="score">0</span>　🪙 <span id="coins">0</span><br><span id="level">LV 1</span> · <span id="zone">달빛 숲</span></div><div class="hudbox right">🏃 거리 <span id="distance">0</span>m　⚡ <span id="speed">3.0x</span><br>🏆 최고 <span id="best">0</span> <button id="pauseBtn" aria-label="일시정지">Ⅱ</button></div></div>
+ <div id="notice" aria-live="polite"></div>
+ <section class="overlay" id="menu"><div class="box menu-box"><h1>🧟 좀비런 DX v4: 픽셀 히어로</h1><p>6명의 영웅 중 선택하고 옷과 색을 바꿔 나만의 캐릭터로 달려보세요!</p>
+ <div class="hero-grid" id="heroGrid">
+ <button class="choice active" data-hero="cat"><canvas class="avatar" id="catPreview" width="96" height="100"></canvas>🐱 닌자 고양이<small>표창 공격</small></button>
+ <button class="choice" data-hero="fox"><canvas class="avatar" id="foxPreview" width="96" height="100"></canvas>🦊 마법 여우<small>코인 자석</small></button>
+ <button class="choice" data-hero="rabbit"><canvas class="avatar" id="rabbitPreview" width="96" height="100"></canvas>🐰 달빛 토끼<small>점프 보호막</small></button>
+ <button class="choice" data-hero="panda"><canvas class="avatar" id="pandaPreview" width="96" height="100"></canvas>🐼 파워 판다<small>충격파</small></button>
+ <button class="choice" data-hero="knight"><canvas class="avatar" id="knightPreview" width="96" height="100"></canvas>🧑‍🚀 용감한 기사<small>검기 난사</small></button>
+ <button class="choice" data-hero="wolf"><canvas class="avatar" id="wolfPreview" width="96" height="100"></canvas>🐺 번개 늑대<small>번개 질주</small></button>
+ </div>
+ <div class="studio"><h3>🎨 나만의 의상 꾸미기</h3><div class="studio-grid"><div><label for="outfitStyle">의상 스타일</label><select id="outfitStyle"><option value="ninja">🥷 닌자복</option><option value="hoodie">🧥 후드티</option><option value="armor">🛡️ 기사 갑옷</option><option value="robe">🪄 마법사 로브</option><option value="sport">👟 운동복</option><option value="royal">👑 왕실 의상</option></select></div><div><label>의상 색상</label><div id="outfitColors" class="color-swatches" aria-label="의상 색상"></div></div></div><p class="outfit-desc">캐릭터마다 다른 옷과 색을 저장합니다. 상점 장비는 별도로 착용할 수 있어요.</p></div>
+ <div class="loadout"><h3>⚔ 장비 상점 <small>(누적 코인으로 영구 구매)</small></h3><div id="shop" class="shop"></div><div class="wallet">🪙 보유 코인: <b id="wallet">0</b></div></div>
+ <button class="btn" id="startBtn">▶ 모험 시작!</button><p>2단 점프 · 5,000점마다 업그레이드 · 코인 폭풍 · 7종 몬스터</p></div></section>
+ <section class="overlay hide" id="upgrade"><div class="box upgradebox"><h2>✨ 5,000점 달성! LEVEL UP!</h2><p>5,000점마다 강화 능력 하나를 선택하세요.</p><div id="upgradeChoices" class="upgradechoices"></div></div></section>
+ <section class="overlay hide" id="over"><div class="box"><h2>게임 오버!</h2><p id="result"></p><p id="newRecord" style="color:#ffe27c;font-weight:900"></p><button class="btn" id="retryBtn">↻ 다시 도전</button> <button class="btn secondary" id="selectBtn">캐릭터 선택</button></div></section>
+ <section class="overlay hide" id="paused"><div class="box"><h2>⏸ 일시정지</h2><p>준비됐다면 이어서 달려보세요!</p><button class="btn" id="resumeBtn">▶ 계속하기</button> <button class="btn secondary" id="pauseMenuBtn">메뉴로</button></div></section>
+</div>
+<div id="touch"><button class="touchbtn" id="jumpBtn">⬆ 2단 점프</button><button class="touchbtn" id="slideBtn">⬇ 슬라이딩</button><button class="touchbtn" id="skillBtn">✦ 능력</button></div>
+<div class="foot">6명 선택 · 의상 6종 × 색상 8종 · 2단 점프 · 5천점 강화 · 코인 폭풍 · 원형 보호막 · 몬스터 7종 · 지역 4종</div>
+<script>
+'use strict';
+(()=>{
+const canvas=document.getElementById('game'),g=canvas.getContext('2d');g.imageSmoothingEnabled=false;
+const $=id=>document.getElementById(id),W=960,H=540,GROUND=428,rand=(a,b)=>a+Math.random()*(b-a),clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const R=(x,y,w,h,c)=>{g.fillStyle=c;g.fillRect(Math.round(x),Math.round(y),Math.max(1,Math.round(w)),Math.max(1,Math.round(h)))};
+const text=(v,x,y,size=18,color='#fff',align='left')=>{g.font=`900 ${size}px monospace`;g.fillStyle='#16172d';g.textAlign=align;g.fillText(v,x+2,y+2);g.fillStyle=color;g.fillText(v,x,y);g.textAlign='left'};
+const pix=(rows,pal,x,y,s)=>{for(let i=0;i<rows.length;i++)for(let j=0;j<rows[i].length;j++){let a=rows[i][j];if(pal[a])R(x+j*s,y+i*s,s,s,pal[a])}};
+const sprites={
+ cat:['..11.......11..','..1221...1221..','..1222222221..','.122222222221.','.123333333321.','.123433334321.','.123333333321.','..1225555221..','...12222221...','..6666666666..','.667766667766.','.667766667766.','..6677777766..','...88....88...','..888....888..'],
+ fox:['..11.......11..','..1221...1221..','..1222222221..','.122222222221.','.123333333321.','.123433334321.','.123333333321.','..1225555221..','...12222221...','..6666666666..','.667766667766.','.667766667766.','..6677777766..','...88....88...','..888....888..'],
+ zombie:['..11111111..','.1222222221.','122222222221','123422224321','122222222221','.1255555521.','..16666661..','.1667667661.','.1667667661.','..11....11..'],
+ skeleton:['..11111111..','.1222222221.','122322223221','122222222221','122244442221','.1222222221.','..15555551..','.1551551551.','..55....55..'],
+ slime:['............','...111111...','..12222221..','.1222222221.','122322223221','122222222221','122244442221','.1111111111.'],
+ bat:['1.........1','11..111..11','11112221111','..1222221..','...123321..','....1111...'],
+ golem:['..11111111..','.1222222221.','122322223221','122222222221','.1222442221.','122222222221','112222222211','..16666661..','..66....66..'],
+ ghost:['...111111...','..12222221..','.1223223221.','.1222222221.','..12244221..','.1222222221.','122222222221','121121121121'],
+ hound:['..111111.....','.122222211...','122322222221','122222222221','.11222222221','..11.11.11...']};
+// Each hero has a distinct pixel silhouette, face, and palette.
+sprites.rabbit=['..11.......11..','..11.......11..','..1221...1221..','..1222222221..','.122222222221.','.123333333321.','.123433334321.','.123333333321.','..1225555221..','...12222221...','..6666666666..','.667766667766.','.667766667766.','...88....88...','..888....888..'];
+sprites.panda=['..111.....111..','..1221...1221..','..1222222221..','.122222222221.','.123333333321.','.123433334321.','.123333333321.','..1225555221..','...12222221...','..6666666666..','.667766667766.','.667766667766.','..6677777766..','...88....88...','..888....888..'];
+sprites.knight=['.....11111.....','....1222221....','...122222221...','..12222222221..','.122333333221.','.123433334321.','.122333333221.','..1225555221..','...12222221...','..6666666666..','.667766667766.','.667766667766.','..6677777766..','...88....88...','..888....888..'];
+sprites.wolf=['..111.....111..','..1221...1221..','..1222222221..','.122222222221.','.123333333321.','.123433334321.','.123333333321.','..1225555221..','...12222221...','..6666666666..','.667766667766.','.667766667766.','..6677777766..','...88....88...','..888....888..'];
+const pals={cat:{1:'#151c36',2:'#565e83',3:'#c2d0ef',4:'#ffe58c',5:'#ff8fb8',6:'#3d3269',7:'#657fea',8:'#252845'},fox:{1:'#6c334c',2:'#f69a4c',3:'#ffe0a5',4:'#40304b',5:'#fff7df',6:'#6745ae',7:'#cfadfa',8:'#6a3756'},rabbit:{1:'#9b7dad',2:'#f3eaff',3:'#fff8ff',4:'#7546a0',5:'#f3a5bf',6:'#b776d8',7:'#f7b9e8',8:'#7f5d98'},panda:{1:'#20283a',2:'#e3e8ec',3:'#fff8e9',4:'#22233c',5:'#f8a0bc',6:'#304962',7:'#6ca8ae',8:'#161d31'},knight:{1:'#5d4770',2:'#e7bb8a',3:'#fce2c2',4:'#334b73',5:'#e58e9d',6:'#536db5',7:'#b7dbff',8:'#24385e'},wolf:{1:'#222e4d',2:'#7a9ac1',3:'#dbe8f7',4:'#ffde80',5:'#ffab9b',6:'#284f89',7:'#67a9eb',8:'#1a2949'},zombie:{1:'#1a3442',2:'#6bc58c',3:'#ffea9c',4:'#793951',5:'#ed6d86',6:'#374b65',7:'#ab79b5'},skeleton:{1:'#34405a',2:'#ebeddb',3:'#554e70',4:'#8b5986',5:'#a7b9c6'},slime:{1:'#206d75',2:'#63e4c7',3:'#265668',4:'#c3fff0'},bat:{1:'#43345c',2:'#ad70d0',3:'#ffda92'},golem:{1:'#2b3e56',2:'#8e99a9',3:'#fddb80',4:'#506d89',6:'#424b64'},ghost:{1:'#7e6fbc',2:'#ddcef9',3:'#48366d',4:'#c377a8'},hound:{1:'#2d503f',2:'#83bf78',3:'#ffd886'}};
+let state='menu',hero='cat',t=0,last=0,dist=0,score=0,coins=0,hp=3,speed=825,nextLevel=5000,level=1,enemyT=.9,coinT=.05,powerT=3.8,inv=0,shield=0,boost=0,skillCD=0,shake=0,notes='',noteT=0,worldX=0,magnetWave=0,zone=0,projectiles=[],mobs=[],drops=[],parts=[],floaters=[],stats={attack:1,magnet:1,jump:1,armor:0,luck:0},keys={jump:false,slide:false},best=0,wallet=0,owned={sword:false,armor:false,boots:false,cape:false},equipped={sword:false,armor:false,boots:false,cape:false};
+const STORE='zombierun-dx-v2';
+const OUTFIT_STORE='zombierun-outfits-v4';
+const outfitPalette=['#6c75e9','#ef719a','#48c5bd','#f5bd5c','#b57cef','#e6f1fa','#65ba70','#f17d50'];
+const heroIds=['cat','fox','rabbit','panda','knight','wolf'];
+const outfits=Object.fromEntries(heroIds.map(id=>[id,{style:id==='fox'?'robe':id==='knight'?'armor':id==='panda'?'sport':'ninja',color:'#6c75e9'}]));
+try{const loaded=JSON.parse(localStorage.getItem(OUTFIT_STORE)||'{}');for(const id of heroIds)if(loaded[id]&&['ninja','hoodie','armor','robe','sport','royal'].includes(loaded[id].style)&&outfitPalette.includes(loaded[id].color))outfits[id]=loaded[id]}catch(e){}
+const saveOutfits=()=>{try{localStorage.setItem(OUTFIT_STORE,JSON.stringify(outfits))}catch(e){}};
+try{const d=JSON.parse(localStorage.getItem(STORE)||'{}');best=Number(d.best)||0;wallet=Number(d.wallet)||0;owned={...owned,...(d.owned||{})};equipped={...equipped,...(d.equipped||{})}}catch(e){}
+const save=()=>{try{localStorage.setItem(STORE,JSON.stringify({best,wallet,owned,equipped}))}catch(e){}};
+const p={x:140,y:GROUND-61,w:49,h:61,vy:0,jumps:0,ground:true,hold:0,run:0,slide:false,attackT:0};
+const gear=[{id:'sword',icon:'⚔️',name:'별빛 검',cost:90,desc:'자동 검기 공격'},{id:'armor',icon:'🧥',name:'달빛 옷',cost:130,desc:'체력 +2'},{id:'boots',icon:'🥾',name:'구름 부츠',cost:100,desc:'점프 높이 UP'},{id:'cape',icon:'🦸',name:'자석 망토',cost:160,desc:'코인 흡수 UP'}];
+function drawOutfitArt(ctx,style,color,x,y,s){
+ const q=(a,b,w,h,c)=>{ctx.fillStyle=c;ctx.fillRect(Math.round(x+a*s),Math.round(y+b*s),Math.round(w*s),Math.round(h*s))};
+ const edge='#25314e',light='#f7f1e8';
+ if(style==='robe'){q(2,9,11,4,color);q(1,11,13,3,color);q(5,9,4,1,light);q(7,10,1,3,'#ffdc77')}
+ else if(style==='armor'){q(2,9,11,4,edge);q(3,9,9,3,color);q(6,9,3,2,light);q(2,10,2,2,light);q(11,10,2,2,light)}
+ else if(style==='hoodie'){q(2,9,11,4,color);q(3,8,9,2,color);q(6,9,3,1,light);q(4,11,1,2,edge);q(10,11,1,2,edge)}
+ else if(style==='sport'){q(2,9,11,4,color);q(6,9,3,4,light);q(2,11,11,1,edge);q(2,14,4,1,color);q(9,14,4,1,color)}
+ else if(style==='royal'){q(2,9,11,4,color);q(4,9,7,1,light);q(2,12,11,1,'#ffd66f');q(5,1,5,1,'#ffd66f');q(5,0,1,2,'#ffd66f');q(9,0,1,2,'#ffd66f')}
+ else{q(2,9,11,4,color);q(3,9,9,1,edge);q(5,11,5,1,light);q(11,10,2,2,edge)}
+ // Animated accessories are drawn on top during gameplay.
+}
+function previewHeroes(){for(const id of heroIds){const c=$(id+'Preview');if(!c)continue;const q=c.getContext('2d');q.clearRect(0,0,c.width,c.height);q.imageSmoothingEnabled=false;const rows=sprites[id],palette=pals[id],size=5;const ox=10,oy=7;for(let i=0;i<rows.length;i++)for(let j=0;j<rows[i].length;j++){const color=palette[rows[i][j]];if(color){q.fillStyle=color;q.fillRect(ox+j*size,oy+i*size,size,size)}}drawOutfitArt(q,outfits[id].style,outfits[id].color,ox,oy,size)}}
+function costumeUI(){const cfg=outfits[hero];$('outfitStyle').value=cfg.style;const root=$('outfitColors');root.replaceChildren();for(const color of outfitPalette){const b=document.createElement('button');b.className='swatch'+(cfg.color===color?' active':'');b.style.background=color;b.type='button';b.setAttribute('aria-label','옷 색상 '+color);b.setAttribute('aria-pressed',cfg.color===color);b.onclick=()=>{outfits[hero].color=color;saveOutfits();costumeUI();previewHeroes()};root.appendChild(b)}previewHeroes()}
+$('outfitStyle').addEventListener('change',e=>{outfits[hero].style=e.target.value;saveOutfits();costumeUI()});
+function shop(){const el=$('shop');el.innerHTML='';for(const it of gear){const b=document.createElement('button');b.className='shopitem'+(equipped[it.id]?' equipped':'');let status=equipped[it.id]?'착용 중':owned[it.id]?'장착하기':`${it.cost} 코인`;b.innerHTML=`<span>${it.icon}</span>${it.name}<small>${status}</small>`;b.title=it.desc;b.onclick=()=>{if(!owned[it.id]){if(wallet<it.cost){note('코인이 부족해요!');return}wallet-=it.cost;owned[it.id]=true}equipped[it.id]=!equipped[it.id];save();shop();};el.appendChild(b)}$('wallet').textContent=wallet.toLocaleString()}
+shop();costumeUI();
+const upgradePool=[{icon:'⚔️',name:'공격력 UP',desc:'검기와 공격 범위 증가',fn:()=>stats.attack++},{icon:'🧲',name:'코인 자석 UP',desc:'코인을 더 멀리서 흡수',fn:()=>stats.magnet++},{icon:'❤️',name:'생명력 회복',desc:'체력 2 회복 · 최대 7',fn:()=>hp=Math.min(7,hp+2)},{icon:'🪽',name:'점프 강화',desc:'점프를 더 높게',fn:()=>stats.jump++},{icon:'🛡️',name:'방어력 UP',desc:'피격 시 쉴드 3초',fn:()=>{stats.armor++;shield=Math.max(shield,3)}},{icon:'🍀',name:'행운 UP',desc:'코인 점수 추가 획득',fn:()=>stats.luck++}];
+function show(screen){for(const id of ['menu','over','paused','upgrade'])$(id).classList.toggle('hide',id!==screen);$('hud').style.display=screen==='menu'?'none':'flex'}
+function note(v){notes=v;noteT=1.55;$('notice').textContent=v}
+function burst(x,y,c,n=10){for(let i=0;i<n;i++)parts.push({x,y,vx:rand(-250,250),vy:rand(-240,80),life:rand(.3,.8),color:c,s:rand(3,8)})}
+function start(){t=0;dist=0;score=0;coins=0;hp=3+(equipped.armor?2:0);speed=825;nextLevel=5000;level=1;enemyT=1.35;coinT=.12;powerT=4;inv=0;shield=0;boost=0;skillCD=0;shake=0;notes='';noteT=0;worldX=0;magnetWave=0;zone=0;projectiles=[];mobs=[];drops=[];parts=[];floaters=[];stats={attack:1,magnet:1,jump:1,armor:0,luck:0};keys.jump=false;keys.slide=false;Object.assign(p,{x:140,y:GROUND-61,w:49,h:61,vy:0,jumps:0,ground:true,hold:0,run:0,slide:false,attackT:0});state='play';$('notice').textContent='';show('none');hud()}
+function end(){state='over';if(score>best){best=Math.floor(score);$('newRecord').textContent='🏆 신기록 달성!'}else $('newRecord').textContent=`🏆 최고기록 ${best.toLocaleString()}점`;wallet+=coins;save();$('result').textContent=`⭐ ${Math.floor(score).toLocaleString()}점 · 🏃 ${Math.floor(dist)}m · 🪙 ${coins}개 획득 (상점 지갑에 저장)`;shop();show('over')}
+function pause(){if(state==='play'){state='paused';show('paused')}else if(state==='paused'){state='play';show('none')}}
+function upgrade(){state='upgrade';level++;const picks=[...upgradePool].sort(()=>Math.random()-.5).slice(0,3);const root=$('upgradeChoices');root.innerHTML='';for(const up of picks){let b=document.createElement('button');b.className='upgradecard';b.innerHTML=`<span class="large">${up.icon}</span>${up.name}<small>${up.desc}</small>`;b.onclick=()=>{up.fn();state='play';show('none');note('✨ '+up.name+'!');hud()};root.appendChild(b)}show('upgrade')}
+function hud(){$('hp').textContent='♥'.repeat(Math.max(0,hp));$('score').textContent=Math.floor(score).toLocaleString();$('coins').textContent=coins;$('distance').textContent=Math.floor(dist);$('best').textContent=Math.max(best,Math.floor(score)).toLocaleString();$('attack').textContent=stats.attack;$('level').textContent='LV '+level;$('zone').textContent=['달빛 숲','좀비 마을','유령 묘지','보랏빛 성'][zone];$('speed').textContent=(speed/275).toFixed(1)+'x'}
+function jumpStart(){if(state!=='play')return;if(p.jumps<2){p.vy=-(815+stats.jump*30+(equipped.boots?90:0));p.hold=.34;p.ground=false;p.jumps++;p.slide=false;burst(p.x+20,GROUND-8,'#bddafa',7)}keys.jump=true}
+function jumpEnd(){keys.jump=false;p.hold=0}
+function slide(x){keys.slide=x;if(!x)p.slide=false}
+function skill(){if(state!=='play'||skillCD>0)return;
+ if(hero==='cat'){skillCD=8;shield=Math.max(shield,2.5);for(let i=0;i<4;i++)projectiles.push({x:p.x+38,y:p.y+20+i*8,vx:1050,life:.75,power:2+stats.attack,kind:'star'});note('🐱 그림자 표창!')}
+ else if(hero==='fox'){skillCD=9;magnetWave=4;shield=Math.max(shield,1);note('🦊 황금 코인 마법!')}
+ else if(hero==='rabbit'){skillCD=9;shield=Math.max(shield,5);p.vy=-900;p.ground=false;note('🐰 달빛 점프 방어막!')}
+ else if(hero==='panda'){skillCD=10;shield=Math.max(shield,3);for(const m of mobs)if(m.x-p.x<420)damageMob(m,5+stats.attack);note('🐼 판다 충격파!')}
+ else if(hero==='knight'){skillCD=8;shield=Math.max(shield,2);for(let i=0;i<7;i++)projectiles.push({x:p.x+38+i*18,y:p.y+12+i*5,vx:1050,life:1,power:2+stats.attack,kind:'blade'});note('⚔️ 기사 검기 난사!')}
+ else if(hero==='wolf'){skillCD=10;boost=Math.max(boost,4);shield=Math.max(shield,4);note('🐺 번개 무적 질주!')}
+ burst(p.x+25,p.y+20,'#a8faff',24)
+}
+function spawnMob(){const r=Math.random(),kind=r<.23?'zombie':r<.39?'hound':r<.54?'bat':r<.68?'slime':r<.79?'skeleton':r<.90?'ghost':'golem';let w=kind==='golem'?76:kind==='hound'?64:kind==='bat'?50:kind==='ghost'?53:kind==='slime'?60:49;let h=kind==='golem'?75:kind==='hound'?35:kind==='bat'?35:kind==='ghost'?61:kind==='slime'?38:59;let y=GROUND-h;if(kind==='bat')y=GROUND-116;if(kind==='ghost')y=GROUND-139;mobs.push({kind,x:W+55,y,w,h,hp:kind==='golem'?4:kind==='skeleton'?2:1,phase:rand(0,6),hit:false,flash:0})}
+function spawnCoins(){const count=10+Math.floor(rand(0,6)),shape=Math.floor(rand(0,4));const base=GROUND-(shape===0?78:shape===1?145:shape===2?205:118);for(let i=0;i<count;i++){const y=shape===2?base-Math.sin((i/(count-1))*Math.PI)*78:shape===3?base-Math.sin(i*.72)*40:base;drops.push({type:'coin',x:W+20+i*34,y,w:21,h:21,vx:0,hit:false,tw:rand(0,6)})}if(Math.random()<.14)spawnPickup()}
+function spawnPickup(){const list=['heart','shield','boost','sword','armor'];const type=list[Math.floor(Math.random()*list.length)];drops.push({type,x:W+45,y:GROUND-175,w:32,h:32,hit:false,tw:0})}
+function hit(a,b,pad=5){return a.x+pad<b.x+b.w-pad&&a.x+a.w-pad>b.x+pad&&a.y+pad<b.y+b.h-pad&&a.y+a.h-pad>b.y+pad}
+function earn(it){it.hit=true;const x=it.x,y=it.y;if(it.type==='coin'){coins++;score+=22+stats.luck*9;floaters.push({x,y,t:.6,txt:'+🪙',c:'#ffe079'});burst(x,y,'#ffe47d',3)}else{const type=it.type;if(type==='heart'){hp=Math.min(7,hp+1);note('❤️ 생명력 +1')}if(type==='shield'){shield=Math.max(shield,6);note('🛡️ 보호막!')}if(type==='boost'){boost=Math.max(boost,4);shield=Math.max(shield,4);note('⚡ 무적 질주!')}if(type==='sword'){p.attackT=8;note('⚔️ 황금 검기 8초!')}if(type==='armor'){shield=Math.max(shield,7);note('🧥 임시 방어구!')}burst(x,y,'#b9f8ff',18)}}
+function damageMob(m,dmg){m.hp-=dmg;m.flash=.13;burst(m.x+20,m.y+25,'#b6f7c9',9);if(m.hp<=0){m.hit=true;score+=50;burst(m.x+20,m.y+25,'#b5d8ff',18);if(Math.random()<.30)for(let i=0;i<3;i++)drops.push({type:'coin',x:m.x+rand(-12,25),y:m.y+rand(-12,25),w:21,h:21,hit:false,tw:rand(0,6)})}}
+function update(dt){t+=dt;worldX+=speed*dt;dist+=speed*dt/17;score+=speed*dt/27;speed=Math.min(1150,825+t*4.1);zone=Math.floor(dist/1100)%4;p.run+=dt*26;inv=Math.max(0,inv-dt);shield=Math.max(0,shield-dt);boost=Math.max(0,boost-dt);skillCD=Math.max(0,skillCD-dt);p.attackT=Math.max(0,p.attackT-dt);magnetWave=Math.max(0,magnetWave-dt);shake=Math.max(0,shake-dt);if(noteT>0){noteT-=dt;if(noteT<=0)$('notice').textContent=''}
+ p.slide=keys.slide&&p.ground;if(!p.ground){let grav=2550;if(keys.jump&&p.vy<0&&p.hold>0){grav=1050;p.hold-=dt}else p.hold=0;p.vy+=grav*dt;p.y+=p.vy*dt;if(p.y>=GROUND-p.h){p.y=GROUND-p.h;p.vy=0;p.jumps=0;p.ground=true;burst(p.x+20,GROUND-3,'#d9bca2',5)}}
+ enemyT-=dt;coinT-=dt;powerT-=dt;
+ if(enemyT<=0){spawnMob();enemyT=rand(.72,1.14)}
+ if(coinT<=0){spawnCoins();coinT=rand(.66,1.05)}
+ if(powerT<=0){spawnPickup();powerT=rand(6.3,9)}
+ const hb={x:p.x+9,y:p.slide?GROUND-31:p.y+8,w:32,h:p.slide?27:48};
+ if(equipped.sword||p.attackT>0){if(Math.floor(t*5.6)!==Math.floor((t-dt)*5.6)){projectiles.push({x:p.x+42,y:p.y+24,vx:990,life:.57,power:stats.attack+(equipped.sword?1:0),kind:'blade'})}}
+ for(const proj of projectiles){proj.x+=proj.vx*dt;proj.life-=dt;for(const m of mobs)if(!m.hit&&hit({x:proj.x,y:proj.y,w:30,h:19},m,0)){damageMob(m,proj.power);proj.life=0;break}}
+ for(const m of mobs){m.x-=speed*dt;m.flash=Math.max(0,m.flash-dt);if(m.kind==='bat'||m.kind==='ghost')m.y+=Math.sin(t*8+m.phase)*.7;if(!m.hit&&hit(hb,m,10)){if(shield>0||boost>0||inv>0){if(shield>0||boost>0){damageMob(m,5)}}else{hp=Math.max(0,hp-1);inv=1.7;shake=.3;note('💔 괴물에 부딪혔어요!');burst(p.x+25,p.y+25,'#ff6a97',19);if(hp===0){end();return}}m.hit=true}}
+ for(const it of drops){it.x-=speed*dt;let cx=p.x+21,cy=p.y+20,dx=cx-it.x,dy=cy-it.y;const magnet=100+stats.magnet*90+(hero==='fox'?170:0)+(equipped.cape?180:0)+(magnetWave?420:0);if(it.type==='coin'&&Math.hypot(dx,dy)<magnet){const k=Math.min(1,dt*(8+stats.magnet*2));it.x+=dx*k;it.y+=dy*k}if(!it.hit&&(hit(hb,it,0)||(it.type==='coin'&&Math.hypot(dx,dy)<31)))earn(it)}
+ for(const q of parts){q.x+=q.vx*dt;q.y+=q.vy*dt;q.vy+=700*dt;q.life-=dt}for(const f of floaters){f.y-=60*dt;f.t-=dt}
+ mobs=mobs.filter(m=>m.x>-110&&!m.hit);drops=drops.filter(a=>a.x>-75&&!a.hit);projectiles=projectiles.filter(q=>q.life>0&&q.x<W+90);parts=parts.filter(q=>q.life>0);floaters=floaters.filter(q=>q.t>0);
+ hud();if(score>=nextLevel){nextLevel+=5000;upgrade()}}
+const themes=[{sky:'#17264b',far:'#2e4172',hill:'#324c60',building:'#334657',ground:'#3b4359',grass:'#7bc49b',moon:'#fbe4ad',accent:'#d8ceff',name:'달빛 숲'},{sky:'#2e234f',far:'#59466b',hill:'#563b62',building:'#51405b',ground:'#4a384b',grass:'#d2987a',moon:'#f8c79c',accent:'#d3a6df',name:'좀비 마을'},{sky:'#162b38',far:'#31525e',hill:'#33575b',building:'#3c505d',ground:'#3a4f57',grass:'#a3cba8',moon:'#caf5e0',accent:'#92c0da',name:'유령 묘지'},{sky:'#21183e',far:'#493663',hill:'#3e345b',building:'#433055',ground:'#3a2b50',grass:'#c29ad9',moon:'#e1baff',accent:'#ddaff7',name:'보랏빛 성'}];
+function background(){const a=themes[zone];R(0,0,W,H,a.sky);R(0,190,W,238,a.far);R(720,53,90,90,a.moon);R(731,66,16,15,a.sky);R(772,104,13,12,a.sky);for(let i=0;i<62;i++){const sx=(i*181+45)%960,sy=(i*67+18)%218;R(sx,sy,i%3===0?3:2,2,'#b4b5e7')}
+const px=worldX*.07;for(let i=-2;i<12;i++){let x=i*116-(px%116),y=275+(i*17%43);R(x,y,135,GROUND-y,a.hill);if(zone===0){R(x+34,y-112,12,115,'#293e49');R(x+4,y-112,72,46,'#336961');R(x+18,y-145,54,44,'#417c75');R(x+32,y-162,30,24,'#63a38b')}if(zone===1){R(x+7,y-105,89,110,'#4a3858');R(x-7,y-124,118,22,'#985d75');for(let k=0;k<3;k++)R(x+17+k*28,y-68,12,18,'#ffcd86');R(x+45,y-22,25,25,'#292840')}if(zone===2){R(x+30,y-42,48,48,'#596875');R(x+18,y-53,72,18,'#687987');R(x+49,y-32,9,20,'#9aafbb');R(x+44,y-26,19,6,'#9aafbb');R(x+85,y-91,8,91,'#243f46')}if(zone===3){R(x+8,y-118,90,125,'#3c2c55');R(x+16,y-155,22,52,'#594269');R(x+65,y-173,22,65,'#594269');for(let k=0;k<3;k++)R(x+22+k*28,y-67,11,19,'#f0b8a0')}}
+const near=worldX*.23;for(let i=-2;i<11;i++){const x=i*121-(near%121);if(zone===0){R(x+45,335,11,93,'#38564b');R(x+20,334,66,16,'#397d69');R(x+30,311,51,34,'#4d9478');R(x+39,297,34,20,'#66aa88')}if(zone===1){R(x+26,346,74,82,'#594464');R(x+16,336,94,14,'#88566c');R(x+42,361,13,18,'#f3bc79');R(x+70,361,13,18,'#f3bc79')}if(zone===2){R(x+30,380,60,48,'#617481');R(x+23,375,74,11,'#89909d');R(x+52,388,14,32,'#abbcca')}if(zone===3){R(x+21,325,82,103,'#4e3a6a');R(x+43,348,15,24,'#d5a8e1');R(x+74,348,15,24,'#d5a8e1')}}
+R(0,GROUND,W,H-GROUND,a.ground);R(0,GROUND,W,11,a.grass);R(0,GROUND+11,W,9,'#262d3f');const ofs=worldX%85;for(let i=-1;i<13;i++){let x=i*85-ofs;R(x,GROUND+40,43,5,'#85819a');R(x+31,GROUND+78,19,5,'#6c687e');R(x+17,GROUND+20,5,5,a.accent)}}
+function drawHero(kind,x,y,scale=4,frame=0,sliding=false){
+ g.save();if(sliding){g.translate(x+48,GROUND-28);g.scale(1.15,.61);x=-30;y=-42}else{g.translate(x,y);x=0;y=0}
+ const s=scale,run=Math.floor(frame)%4,bob=p.ground&&!p.slide?(run%2)*2:0;
+ pix(sprites[kind],pals[kind],x,y+bob,s);
+ drawOutfitArt(g,outfits[kind].style,outfits[kind].color,x,y+bob,s);
+ const leg=run%2===0?0:5;R(x+12,y+13*s,10,7,'#222846');R(x+37,y+13*s+leg,10,7,'#222846');
+ if(kind==='cat'){R(x-8,y+8*s,14,7,'#ff75b0');R(x-15-(run%2)*8,y+8*s+4,12,6,'#e45c9e')}
+ else if(kind==='fox'){R(x-13,y+11*s,17,10,'#f8a56e');R(x-23,y+10*s,15,12,'#ffcf87');R(x-30,y+10*s+5,12,8,'#f5945e')}
+ else if(kind==='rabbit'){R(x-12,y+40,14,7,'#f1bbe9');R(x-17-run%2*5,y+42,13,5,'#fff2f9')}
+ else if(kind==='panda'){R(x-8,y+43,12,14,'#18243c');R(x+45,y+40,10,14,'#18243c')}
+ else if(kind==='knight'){R(x+48,y+32,6,32,'#e7c57d');R(x+52,y+12,7,28,'#d9f5ff')}
+ else if(kind==='wolf'){R(x-21,y+48,25,9,'#9ac4e2');R(x-31,y+51+run%2*5,13,6,'#a5d7ef')}
+ if(equipped.sword||p.attackT>0){R(x+49,y+23,6,33,'#e9cc75');R(x+52,y+8,7,27,'#d0faff');R(x+47,y+25,19,5,'#ffda8d')}
+ if(equipped.armor){R(x+10,y+38,38,10,'#9bc9ff');R(x+20,y+43,18,6,'#5064a0')}
+ if(equipped.cape){R(x-11,y+40,15,26,'#aa78e2')}
+ if(equipped.boots){R(x+6,y+13*s,15,8,'#b3effe');R(x+34,y+13*s,15,8,'#b3effe')}
+ if(!p.ground){R(x+5,y+4,6,6,'#fff3cc')}g.restore()
+}
+function monster(m){const scale=m.w/(sprites[m.kind][0].length||12),bob=(m.kind==='ghost'||m.kind==='bat')?Math.sin(t*8+m.phase)*5:0;if(m.flash>0){R(m.x,m.y,m.w,m.h,'#fff7c3');return}pix(sprites[m.kind],pals[m.kind],m.x,m.y+bob,scale);if(m.kind==='golem')R(m.x+10,m.y+1,m.w-20,7,'#c0d3dd')}
+function item(it){const x=it.x,y=it.y+Math.sin(t*9+it.tw)*3;if(it.type==='coin'){R(x+5,y,12,21,'#eeaa43');R(x,y+5,22,11,'#eeaa43');R(x+3,y+3,16,15,'#ffe27a');R(x+8,y+7,6,8,'#fff4ad');R(x+1,y+1,4,4,'#fff5cf');return}const colors={heart:'#ff7297',shield:'#8be7f7',boost:'#fbd76c',sword:'#bdedff',armor:'#b4a4fb'};R(x+2,y+4,27,26,colors[it.type]);R(x+7,y+1,17,33,'#fff3d3');text({heart:'♥',shield:'◆',boost:'⚡',sword:'⚔',armor:'✦'}[it.type],x+15,y+24,20,'#4a3865','center')}
+// 둥근 보호막: 그라데이션 구체, 3중 광륜, 회전하는 마법 문양과 에너지 입자
+function drawShield(){
+ if(shield<=0)return;
+ const cx=p.x+p.w/2,cy=p.y+p.h/2,r=58;
+ const pulse=Math.sin(t*7)*2.8;
+ g.save();
+ const halo=g.createRadialGradient(cx,cy,15,cx,cy,r+24);
+ halo.addColorStop(0,'rgba(80,245,255,0.02)');halo.addColorStop(.64,'rgba(70,190,255,0.12)');halo.addColorStop(.83,'rgba(75,220,255,0.19)');halo.addColorStop(1,'rgba(109,130,255,0)');
+ g.fillStyle=halo;g.beginPath();g.arc(cx,cy,r+24+pulse,0,Math.PI*2);g.fill();
+ g.shadowColor='#6ceeff';g.shadowBlur=25;
+ g.lineWidth=5;g.strokeStyle='#5af6ff';g.beginPath();g.arc(cx,cy,r+pulse,0,Math.PI*2);g.stroke();
+ g.shadowBlur=11;g.lineWidth=2;g.strokeStyle='rgba(241,255,255,.9)';g.beginPath();g.arc(cx,cy,r-7+pulse,0,Math.PI*2);g.stroke();
+ g.shadowBlur=0;g.lineWidth=3;g.strokeStyle='rgba(163,127,255,.85)';
+ for(let i=0;i<4;i++){const a=t*1.75+i*Math.PI/2;g.beginPath();g.arc(cx,cy,r+9,a,a+.6);g.stroke()}
+ // 공전하는 반짝임과 바깥으로 튀는 작은 불꽃
+ for(let i=0;i<13;i++){
+  const angle=i*Math.PI*2/13+t*(i%2?1.6:-1.15);
+  const sr=r+7+Math.sin(t*8+i*3)*9;
+  const x=cx+Math.cos(angle)*sr,y=cy+Math.sin(angle)*sr;
+  const size=2+((i*7)%4);
+  g.fillStyle=i%3===0?'#ffe9a0':i%3===1?'#baffff':'#bcabff';
+  g.shadowColor=g.fillStyle;g.shadowBlur=9;
+  g.fillRect(x-size/2,y-size/2,size,size);
+  if(i%4===0){g.fillRect(x-1,y-7,2,14);g.fillRect(x-7,y-1,14,2)}
+ }
+ g.restore();
+}
+function render(){g.save();if(shake>0)g.translate(rand(-5,5),rand(-4,4));background();for(const it of drops)item(it);for(const m of mobs)monster(m);for(const pr of projectiles){R(pr.x,pr.y,30,14,pr.kind==='star'?'#c3f2ff':'#ffe09f');R(pr.x+14,pr.y-6,12,27,'#fff8d7')}
+if(state==='menu'){drawHero(hero,440,GROUND-90,5,Math.floor(t*9))}else if(!(inv>0&&Math.floor(t*16)%2)){drawHero(hero,p.x,p.slide?GROUND-39:p.y,3.8,p.run,p.slide);}
+if(state!=='menu')drawShield();for(const q of parts)R(q.x,q.y,q.s,q.s,q.color);for(const f of floaters)text(f.txt,f.x,f.y,15,f.c);
+if(state==='play'){R(14,380,145,31,'#1b2949');R(17,384,139*Math.max(0,1-skillCD/(hero==='cat'||hero==='knight'?8:hero==='panda'||hero==='wolf'?10:9)),22,'#76d6d3');text(skillCD<=0?'X 스킬 준비!':`X 스킬 ${skillCD.toFixed(1)}초`,24,401,13,'#fff');if(shield>0)text('🛡 보호막',168,400,15,'#a1fffb');if(boost>0)text('⚡ 부스터',284,400,15,'#fff7a1')}
+g.restore()}
+function loop(ms){if(!last)last=ms;const dt=Math.min(.036,(ms-last)/1000);last=ms;if(state==='play')update(dt);else if(state==='menu')t+=dt;render();requestAnimationFrame(loop)}
+for(const b of document.querySelectorAll('[data-hero]'))b.addEventListener('click',()=>{hero=b.dataset.hero;document.querySelectorAll('[data-hero]').forEach(x=>x.classList.toggle('active',x.dataset.hero===hero));costumeUI()});
+$('startBtn').onclick=start;$('retryBtn').onclick=start;$('selectBtn').onclick=()=>{state='menu';shop();show('menu')};$('pauseBtn').onclick=pause;$('resumeBtn').onclick=pause;$('pauseMenuBtn').onclick=()=>{state='menu';shop();show('menu')};
+window.addEventListener('keydown',e=>{if(['Space','ArrowUp','ArrowDown','KeyX','KeyP','Escape'].includes(e.code))e.preventDefault();if((e.code==='Space'||e.code==='ArrowUp')&&!e.repeat){if(state==='menu'||state==='over')start();else jumpStart()}if(e.code==='ArrowDown')slide(true);if(e.code==='KeyX'&&!e.repeat)skill();if((e.code==='KeyP'||e.code==='Escape')&&!e.repeat)pause()});
+window.addEventListener('keyup',e=>{if(e.code==='Space'||e.code==='ArrowUp')jumpEnd();if(e.code==='ArrowDown')slide(false)});
+window.addEventListener('blur',()=>{jumpEnd();slide(false);if(state==='play')pause()});
+function bind(id,down,up){let el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();down();el.setPointerCapture?.(e.pointerId)});if(up){for(const ev of ['pointerup','pointercancel','lostpointercapture'])el.addEventListener(ev,e=>{e.preventDefault();up()})}}
+bind('jumpBtn',jumpStart,jumpEnd);bind('slideBtn',()=>slide(true),()=>slide(false));bind('skillBtn',skill);
+canvas.addEventListener('pointerdown',e=>{if(state==='play'&&e.pointerType==='touch')jumpStart()});canvas.addEventListener('pointerup',jumpEnd);
+costumeUI();hud();requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
